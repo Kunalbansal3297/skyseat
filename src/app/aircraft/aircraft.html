@@ -1,0 +1,90 @@
+<div class="booking-layout">
+
+  <!-- LEFT: 3D AIRPLANE -->
+  <div class="airplane-section">
+    <canvas #canvas></canvas>
+  </div>
+
+  <!-- RIGHT: FLIGHT FORM / LIST -->
+  <div class="flight-section">
+
+    <div class="flight-search">
+
+      <h2>Search Flights</h2>
+
+      <div class="route">
+        <div>
+          <label>From</label>
+          <input
+            type="text"
+            [(ngModel)]="from"
+            placeholder="DEL"
+          />
+        </div>
+
+        <div>
+          <label>To</label>
+          <input
+            type="text"
+            [(ngModel)]="to"
+            placeholder="BOM"
+          />
+        </div>
+      </div>
+
+      <button class="search-btn" (click)="searchFlights()">
+        Search Flights
+      </button>
+
+    </div>
+
+
+    <!-- FLIGHT RESULTS -->
+
+    <div class="flight-results">
+
+      @for (flight of filteredFlights; track flight.flightNumber) {
+
+        <div class="flight-card">
+
+          <div class="flight-header">
+            <h3>{{ flight.flightNumber }}</h3>
+            <strong>₹{{ flight.price }}</strong>
+          </div>
+
+          <div class="route-time">
+            <div>
+              <strong>{{ flight.departure }}</strong>
+              <span>{{ flight.from }}</span>
+            </div>
+
+            <span>→</span>
+
+            <div>
+              <strong>{{ flight.arrival }}</strong>
+              <span>{{ flight.to }}</span>
+            </div>
+          </div>
+
+          <button
+            class="select-btn"
+            (click)="selectFlight(flight)"
+          >
+            Select
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>
+
+    @if (insideCabin) {
+      <button class="back-btn" (click)="exitCabin()">
+        ← Back to Aircraft
+      </button>
+    }
