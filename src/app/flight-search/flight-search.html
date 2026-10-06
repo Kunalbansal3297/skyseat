@@ -1,0 +1,156 @@
+<div class="search-page">
+
+  <header class="topbar">
+    <div class="logo">
+      <span>✈</span>
+      SkySeat
+    </div>
+
+    <nav>
+      <a class="active">Flights</a>
+      <a>My Trips</a>
+      <a>Check-in</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+
+    <div class="hero-content">
+      <span class="eyebrow">SMARTER WAY TO FLY</span>
+
+      <h1>
+        Where will your<br />
+        <span>next journey</span> take you?
+      </h1>
+
+      <p>
+        Search hundreds of flights and choose your perfect seat
+        with our immersive 3D aircraft experience.
+      </p>
+    </div>
+
+    <div class="search-card">
+
+      <div class="trip-tabs">
+        <button class="active">Round Trip</button>
+        <button>One Way</button>
+        <button>Multi City</button>
+      </div>
+
+      <div class="search-fields">
+
+        <div class="field location-field">
+          <label>FROM</label>
+          <div class="location">
+            <strong>{{ from || 'Delhi' }}</strong>
+            <span>DEL · Indira Gandhi Intl.</span>
+          </div>
+        </div>
+
+        <button class="swap-btn" (click)="swapLocations()">
+          ⇄
+        </button>
+
+        <div class="field location-field">
+          <label>TO</label>
+          <div class="location">
+            <strong>{{ to || 'Mumbai' }}</strong>
+            <span>BOM · Chhatrapati Shivaji Intl.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>DEPARTURE</label>
+          <strong>{{ departureDate || '15 Oct 2026' }}</strong>
+          <span>Thursday</span>
+        </div>
+
+        <div class="field">
+          <label>RETURN</label>
+          <strong>{{ returnDate || '20 Oct 2026' }}</strong>
+          <span>Tuesday</span>
+        </div>
+
+        <div class="field passenger-field">
+          <label>PASSENGERS</label>
+
+          <button class="passenger-button" (click)="showPassengers = !showPassengers">
+            <strong>{{ totalPassengers }} Passenger{{ totalPassengers > 1 ? 's' : '' }}</strong>
+            <span>Economy · {{ adults }} Adult</span>
+          </button>
+
+          @if (showPassengers) {
+            <div class="passenger-popup">
+
+              <div class="passenger-row">
+                <div>
+                  <strong>Adults</strong>
+                  <span>12+ years</span>
+                </div>
+
+                <div class="counter">
+                  <button (click)="decrease('adults')">−</button>
+                  <b>{{ adults }}</b>
+                  <button (click)="increase('adults')">+</button>
+                </div>
+              </div>
+
+              <div class="passenger-row">
+                <div>
+                  <strong>Children</strong>
+                  <span>2–11 years</span>
+                </div>
+
+                <div class="counter">
+                  <button (click)="decrease('children')">−</button>
+                  <b>{{ children }}</b>
+                  <button (click)="increase('children')">+</button>
+                </div>
+              </div>
+
+              <div class="passenger-row">
+                <div>
+                  <strong>Infants</strong>
+                  <span>Under 2 years</span>
+                </div>
+
+                <div class="counter">
+                  <button (click)="decrease('infants')">−</button>
+                  <b>{{ infants }}</b>
+                  <button (click)="increase('infants')">+</button>
+                </div>
+              </div>
+
+            </div>
+          }
+        </div>
+
+      </div>
+
+      <button class="search-btn" (click)="searchFlights()">
+        Search Flights
+        <span>→</span>
+      </button>
+
+    </div>
+
+    <div class="quick-info">
+      <div>
+        <span>🛡</span>
+        <p><strong>Secure booking</strong><br />Your data is protected</p>
+      </div>
+
+      <div>
+        <span>⚡</span>
+        <p><strong>Instant confirmation</strong><br />Get your PNR instantly</p>
+      </div>
+
+      <div>
+        <span>💺</span>
+        <p><strong>3D seat selection</strong><br />Pick your exact seat</p>
+      </div>
+    </div>
+
+  </main>
+
+</div>

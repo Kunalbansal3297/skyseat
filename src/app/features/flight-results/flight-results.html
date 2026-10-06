@@ -1,0 +1,300 @@
+<div class="results-page">
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div class="logo">
+      ✈ <span>SkySeat</span>
+    </div>
+
+    <div class="steps">
+
+      <div class="step active">
+        <span>1</span>
+        Search
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step active">
+        <span>2</span>
+        Flights
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step">
+        <span>3</span>
+        Passengers
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step">
+        <span>4</span>
+        Seats
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- SEARCH SUMMARY -->
+
+  <section class="search-summary">
+
+    <div class="route">
+
+      <div>
+        <small>FROM</small>
+        <strong>{{ from }}</strong>
+      </div>
+
+      <div class="route-line">
+        <span>✈</span>
+        <div></div>
+      </div>
+
+      <div>
+        <small>TO</small>
+        <strong>{{ to }}</strong>
+      </div>
+
+    </div>
+
+    <div class="summary-item">
+      <small>DATE</small>
+      <strong>{{ departureDate }}</strong>
+    </div>
+
+    <div class="summary-item">
+      <small>PASSENGERS</small>
+      <strong>1 Adult · Economy</strong>
+    </div>
+
+    <button class="change-btn" (click)="changeSearch()">
+      Edit Search
+    </button>
+
+  </section>
+
+
+  <!-- MAIN -->
+
+  <main class="content">
+
+    <div class="heading">
+
+      <div>
+        <span class="eyebrow">FLIGHT OPTIONS</span>
+        <h1>{{ sortedFlights.length }} flights found</h1>
+        <p>Choose the flight that works best for your journey.</p>
+      </div>
+
+      <div class="sort">
+
+        <label>Sort by</label>
+
+        <select [(ngModel)]="selectedSort">
+          <option value="recommended">Recommended</option>
+          <option value="price">Lowest Price</option>
+          <option value="duration">Shortest Duration</option>
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="layout">
+
+      <!-- FILTERS -->
+
+      <aside class="filters">
+
+        <h3>Filter results</h3>
+
+        <div class="filter-group">
+
+          <label>Stops</label>
+
+          <label class="check">
+            <input type="checkbox" checked />
+            <span>Non-stop</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" />
+            <span>1 Stop</span>
+          </label>
+
+        </div>
+
+
+        <div class="filter-group">
+
+          <label>Departure time</label>
+
+          <div class="time-box">
+            <span>☀️</span>
+            <div>
+              <strong>Morning</strong>
+              <small>06:00 – 12:00</small>
+            </div>
+          </div>
+
+          <div class="time-box">
+            <span>🌤</span>
+            <div>
+              <strong>Afternoon</strong>
+              <small>12:00 – 18:00</small>
+            </div>
+          </div>
+
+          <div class="time-box">
+            <span>🌙</span>
+            <div>
+              <strong>Evening</strong>
+              <small>18:00 – 00:00</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="filter-group">
+
+          <label>Airlines</label>
+
+          <label class="check">
+            <input type="checkbox" checked />
+            <span>IndiGo</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" checked />
+            <span>Air India</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" />
+            <span>Vistara</span>
+          </label>
+
+        </div>
+
+      </aside>
+
+
+      <!-- FLIGHTS -->
+
+      <section class="flight-list">
+
+        @for (flight of sortedFlights; track flight.id) {
+
+          <article class="flight-card">
+
+            <!-- AIRLINE -->
+
+            <div class="airline">
+
+              <div class="airline-logo">
+                {{ flight.airline.charAt(0) }}
+              </div>
+
+              <div>
+                <strong>{{ flight.airline }}</strong>
+                <span>{{ flight.flightNumber }}</span>
+              </div>
+
+            </div>
+
+
+            <!-- TIMES -->
+
+            <div class="flight-time">
+
+              <div class="time">
+
+                <strong>{{ flight.departure }}</strong>
+
+                <span>{{ flight.from }}</span>
+
+              </div>
+
+
+              <div class="duration">
+
+                <span>{{ flight.duration }}</span>
+
+                <div class="flight-line">
+                  <span></span>
+                </div>
+
+                <small>{{ flight.stops }}</small>
+
+              </div>
+
+
+              <div class="time">
+
+                <strong>{{ flight.arrival }}</strong>
+
+                <span>{{ flight.to }}</span>
+
+              </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="details">
+
+              <span>✈ {{ flight.aircraft }}</span>
+
+              <span>🧳 Cabin bag included</span>
+
+              @if (flight.seatsLeft <= 5) {
+                <span class="warning">
+                  Only {{ flight.seatsLeft }} seats left
+                </span>
+              }
+
+            </div>
+
+
+            <!-- PRICE -->
+
+            <div class="price">
+
+              <small>Starting from</small>
+
+              <strong>₹{{ flight.price | number }}</strong>
+
+              <span>per passenger</span>
+
+              <button
+                (click)="selectFlight(flight)"
+                class="select-btn">
+
+                Select Flight
+                <span>→</span>
+
+              </button>
+
+            </div>
+
+          </article>
+
+        }
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
